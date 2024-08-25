@@ -1,0 +1,11 @@
+@import  
+        'globals', 
+        'media', 
+        'normalize', 
+        'utils', 
+        'variables';
+
+@import 'blocks/header',
+        'blocks/wrapper',
+        'blocks/footer',
+        'blocks/main';

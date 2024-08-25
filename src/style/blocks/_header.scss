@@ -1,0 +1,35 @@
+.header{
+  padding: 10px 40px;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: #83007c 4px solid;
+  &__title{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    &-image>img{
+      width: 40px;
+      height: 40px;
+      background-size: cover;
+      border-radius: 20px;
+    }
+    &-text{
+      font-size: 20px;
+      align-items: center;
+    }
+  }
+  &__menu{
+    &-list{
+      display: flex;
+      gap: 25px;
+    }
+    &-link{
+      &:hover{
+        color: #83007c;
+      }
+    }
+  }
+}

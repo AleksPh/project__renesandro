@@ -1,0 +1,14 @@
+.container{
+  max-width: var(--container-width);
+}
+
+.hidden-mobile{
+  @include mobile{
+    display: none !important;
+  }
+}
+.visible-mobile{
+  @include mobile{
+    display: none !important;
+  }
+}
