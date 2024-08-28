@@ -6,11 +6,11 @@
   background-color: #fff;
   &__card{
     position: absolute;
-    transform: translateX(-130%) translateY(-27%);
+    // display: none;
+    transform: translateX(-130%) translateY(-7%);
     background-color: #fff;
     height: 60vh;
     width: 40vw;
-    // background-color: transparent;
     z-index: 2;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     .card__content{
@@ -85,9 +85,11 @@
     border-spacing: 0px 0px; 
     flex: 1;
     margin: 0 auto;
-    animation: fadeIn 2.5s ease-out forwards;
+    animation: fadeIn 1.5s ease-out forwards;
     &-wrapper{
       flex: 1;
+      overflow-y: scroll;
+      max-height: 670px;
     }
     &-row{
       position: relative;
@@ -238,12 +240,14 @@
         gap: 10px;
       }
       &-button{
-        padding: 0px 10px;
+        // padding: 0px 10px;
         border: 3px solid var(--color-main-grey-text);
         color: var(--color-main-grey-text);
         background-color: #fff;
         border-radius: var(--border-radius-nav);
         font-weight: 600;
+        height: 30px;
+        width: 30px;
         &.prev>img{
           transform: rotate(180deg);
         }
@@ -299,10 +303,35 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translatex(-20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translatex(0);
+  }
+}
+
+.item__inputt{
+  position: relative;
+  font-size: 0;
+  color: #fff;
+  padding: 5px;
+  border-radius: 3px ;
+  border: 3px solid #fff;
+  height: 30px;
+  width: 30px;
+  color: transparent;
+  &::after{
+    content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px; 
+  height: 24px; 
+  background-image: url('/src/images/plus.png'); 
+  background-size: cover; 
+  background-position: center; 
+  transform: translate(-50%, -50%); 
+    
   }
 }

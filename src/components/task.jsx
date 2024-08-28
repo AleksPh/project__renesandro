@@ -42,8 +42,8 @@ const Task = ({ id, name, dimension, templateId, images, text, ammount, genType,
                   <td className="main__table-item"><div className={`item__id ${idTemplateClass}`}>{idTemplateText}</div></td>
                   <td className="main__table-item">
                     <div className="item-img">
-                    {images.map((image, index) => (
-                      <h6 key={index}>{image}</h6> 
+                    {images.map((index) => (
+                      <h6 key={index}>{index}</h6>
                     ))}
                     </div>
                   </td>

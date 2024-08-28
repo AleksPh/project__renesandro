@@ -1,10 +1,12 @@
-// import { useState } from "react";
+
 import Task from "./task";
+
 
 const TaskList = ({ tasks, toggleCard, openCardId}) => {
  
   return (
     <tbody>
+      
       {tasks.map((task) => (
         <Task
           task={task}
@@ -21,7 +23,10 @@ const TaskList = ({ tasks, toggleCard, openCardId}) => {
           isOpen={openCardId === task.id}
           
         />
-      ))}
+        
+      ))
+      }
+      
     </tbody>
   );
 };

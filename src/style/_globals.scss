@@ -15,3 +15,17 @@ a{
   text-decoration: none;
   color: inherit;
 }
+ input{
+  border-radius: 3px;
+  border: 3px solid var(--color-nav-grey-text);
+ }
+
+ select{
+  border-radius: 10px;
+  border: 3px solid var(--color-nav-grey-text);
+  font-weight: 100;
+ }
+ option{
+  border-radius: 3px;
+
+ }

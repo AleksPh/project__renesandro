@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { ReactTyped } from 'react-typed';
 
 import ArrowImg from "../images/arrow.png";
 import ammountImg from "../images/ammount.png"
@@ -9,7 +10,8 @@ import nameImg from "../images/name.png"
 import resultImg from "../images/result.png"
 import sizeImg from "../images/size.png"
 import textImg from "../images/text.png"
-import TaskList from './taskList';
+import TaskList from './taskList'
+
 
 
 
@@ -82,37 +84,38 @@ const Table = ()=>{
     text: '',
     ammount: '',
     genType: '1',
-    imageCount: 0,  
+    images: [],  
   });
+
+  const [imageFiles, setImageFiles] = useState([]); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
-    if (name === 'imageCount') {
-      const validatedValue = Math.max(0, Math.min(3, Number(value)));
-      setNewTask((prevTask) => ({
-        ...prevTask,
-        [name]: validatedValue,
-      }));
-    } else {
-      setNewTask((prevTask) => ({
-        ...prevTask,
-        [name]: value,
-      }));
-    }
+    setNewTask((prevTask) => ({
+      ...prevTask,
+      [name]: value,
+    }));
+  };
+
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files); 
+    setNewTask((prevTask) => ({
+      ...prevTask,
+      images: files, 
+    }));
   };
 
   const addTask = () => {
-    const images = Array.from({ length: newTask.imageCount }, (_, i) => `img-${i + 1}`);
-    
+    const images = newTask.images.map((file) => file.name); 
     const taskToAdd = {
       ...newTask,
       id: tasks.length + 1,
-      images, 
+      images,
     };
 
     setTasks([...tasks, taskToAdd]);
 
+    
     setNewTask({
       name: '',
       dimension: '1x1',
@@ -120,8 +123,9 @@ const Table = ()=>{
       text: '',
       ammount: '',
       genType: '1',
-      imageCount: 0,  
+      images: [],
     });
+    setImageFiles([]);
   };
 
   const today = new Date();
@@ -135,37 +139,24 @@ const Table = ()=>{
   const [openCardId, setOpenCardId] = useState(null);
 
   const toggleCard = (id) => {
-    if (openCardId === id) {
-      setOpenCardId(null); 
-    } else {
-      setOpenCardId(id); 
-    }
+    setOpenCardId(openCardId === id ? null : id);
   };
-
-
-
-  const [title, setTitle] = useState('');
-  const fullTitle = '..T.a.s.k Table';
-
-  useEffect(() => {
-    let index = 0;
-    setTitle(''); 
-    const typingEffect = setInterval(() => {
-      if (index < fullTitle.length) {
-        setTitle((prev) => prev + fullTitle.charAt(index)); 
-        index++;
-      } else {
-        clearInterval(typingEffect);
-      }
-    }, 150);
-
-    return () => clearInterval(typingEffect);
-  }, [fullTitle]);
+  
   return(
     <div className="main">
-      <div className="main__title">{title}</div>
+      <div className="main__title">
+        
+      <ReactTyped
+        strings={['Task Table, 👋']}
+        typeSpeed={80}
+        backSpeed={60}
+        loop = {false}
+      />
+
+      </div>
       <div className="main__content">
       <div className="main__table-wrapper">
+      
         <table className="main__table">
           <thead>
               <tr className="main__table-row head">
@@ -212,16 +203,14 @@ const Table = ()=>{
                                                           <option value="1">mwpswxcudtwxb</option>
                                                           
                                                      </select></th>
-                  <th className="main__table-item"><input
-                  className="input"
-                  type="number"
-                  name="imageCount"
-                  placeholder="Number of Images"
-                  value={newTask.imageCount}
-                  onChange={handleInputChange}
-                  min="0"
-                  max="3"
-                /></th>
+                  <th className="main__table-item" style={{ display: 'flex', alignItems: 'center', height: '60px', gap: '5px'}}>Add Image 
+                  <input className='item__inputt'
+                  type="file"
+                  multiple
+                  onChange={handleFileChange}
+                />
+                
+                </th>
                   <th className="main__table-item"><input
                   className="input"
                   type="text"
@@ -262,6 +251,7 @@ const Table = ()=>{
           <div className="main__table-footer-btns">
             <button className="main__table-footer-button prev"><img src={ArrowImg} alt="Arrow" /></button>
             <button className="main__table-footer-button">1</button>
+            <button className="main__table-footer-button">2</button>
             <button className="main__table-footer-button next"><img src={ArrowImg} alt="Arrow" /></button>
           </div>
 
