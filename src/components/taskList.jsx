@@ -1,17 +1,15 @@
-
 import Task from "./task";
 
+const TaskList = ({ tasks, toggleCard, openCardId, status }) => {
+  const filteredTasks = status === 'todo' ? tasks.filter((task) => task.status !== 'done') : tasks.filter((task) => task.status === 'done');
 
-const TaskList = ({ tasks, toggleCard, openCardId}) => {
- 
   return (
     <tbody>
-      
-      {tasks.map((task) => (
+      {filteredTasks.map((task) => (
         <Task
           task={task}
           key={task.id}
-          id = {task.id}
+          id={task.id}
           name={task.name}
           dimension={task.dimension}
           templateId={task.templateId}
@@ -21,15 +19,11 @@ const TaskList = ({ tasks, toggleCard, openCardId}) => {
           genType={task.genType}
           toggleCard={toggleCard}
           isOpen={openCardId === task.id}
-          
+          status={task.status}
         />
-        
-      ))
-      }
-      
+      ))}
     </tbody>
   );
 };
 
 export default TaskList;
-

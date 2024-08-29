@@ -1,0 +1,21 @@
+.status{
+  padding: 0px 50px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  &__value{
+    font-size: 16px;
+    background-color: #417a0a;
+    display: flex;
+    padding: 5px;
+    color: #fff;
+    border-radius: 10px;
+    &.done{
+      background-color: #165275;
+    }
+  }
+}

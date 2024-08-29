@@ -89,11 +89,15 @@
     &-wrapper{
       flex: 1;
       overflow-y: scroll;
-      max-height: 670px;
+      max-height: 529px;
+      // padding-bottom: 20px;
     }
     &-row{
       position: relative;
       height: 60px;
+      &.hidden{
+        display: none;
+      }
       &.head{
         background-color: #e4e4e4;
       }
@@ -227,10 +231,11 @@
     &-footer{
       width: 100%;
       display: flex;
-      padding: 20px 80px;
+      padding: 40px 80px;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 40px;
+      max-height: 50px;
+      margin-bottom: 0px;
       &-text{
         color: var(--color-main-grey-text);
         font-size: 14px;
@@ -248,6 +253,10 @@
         font-weight: 600;
         height: 30px;
         width: 30px;
+        &.active{
+          border-color: #83007c;
+          color: #83007c;
+        }
         &.prev>img{
           transform: rotate(180deg);
         }
@@ -270,12 +279,15 @@
   &__buttons{
    display: flex;
    justify-content: end;
-   padding: 20px;
+   padding: 20px 50px;
    &-button{
     border-radius: var(--border-radius-nav);
     padding: 5px;
     font-weight: 600;
     border: 3px solid var(--color-nav-grey-text);
+    &.hidden{
+      display: none;
+    }
     &:hover{
       transform: scale(1.05);
       border-color: #83007c;
@@ -303,11 +315,11 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translatex(-20px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translatex(0);
+    transform: translatey(0);
   }
 }
 
