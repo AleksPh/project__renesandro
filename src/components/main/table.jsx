@@ -1,18 +1,19 @@
 import { useState } from 'react'
 import { ReactTyped } from 'react-typed';
 
-import ArrowImg from "../images/arrow.png";
-import ammountImg from "../images/ammount.png"
-import genImg from "../images/gen.png"
-import idImg from "../images/id.png"
-import imageImg from "../images/image.png"
-import nameImg from "../images/name.png"
-import resultImg from "../images/result.png"
-import sizeImg from "../images/size.png"
-import textImg from "../images/text.png"
-import TaskList from './taskList'
-import TaskStatus from './taskStatus';
-import TaskCard from './taskCard';
+import ArrowImg from "../../images/arrow.png";
+import ammountImg from "../../images/ammount.png"
+import genImg from "../../images/gen.png"
+import idImg from "../../images/id.png"
+import imageImg from "../../images/image.png"
+import nameImg from "../../images/name.png"
+import resultImg from "../../images/result.png"
+import sizeImg from "../../images/size.png"
+import textImg from "../../images/text.png"
+import TaskList from './task/taskList'
+
+import TaskStatus from './task/taskStatus';
+import TaskCard from './task/taskCard';
 
 
 const Table = ()=>{

@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import videoSrc from '../images/video/bgc.mp4';
+import videoSrc from '../../images/video/bgc.mp4'
 
 const BackgroundVideo = ({ playbackRate = 1 }) => {
   const videoRef = useRef(null);

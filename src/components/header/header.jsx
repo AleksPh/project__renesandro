@@ -1,4 +1,4 @@
-import logoImg from "../images/logo.png"
+import logoImg from "../../images/logo.png"
 
 
 const Header= ()=>{

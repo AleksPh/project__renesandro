@@ -1,11 +1,10 @@
-// import { useState } from 'react'
-// import { useState } from 'react'
+
 import '../src/style/style.css'
-import BackgroundVideo from './components/bgcVideo'
-import Footer from './components/footer'
-import Header from './components/header'
-import Table from './components/table'
-// import TaskList from './components/taskList'
+
+import BackgroundVideo from './components/main/bgcVideo'
+import Footer from './components/footer/footer'
+import Header from './components/header/header'
+import Table from './components/main/table'
 
 
 
