@@ -1,8 +1,8 @@
 import Task from "./task";
 
-const TaskList = ({ tasks, toggleCard, openCardId, status }) => {
+const TaskList = ({ tasks, status, showCard }) => {
   const filteredTasks = status === 'todo' ? tasks.filter((task) => task.status !== 'done') : tasks.filter((task) => task.status === 'done');
-
+  
   return (
     <tbody>
       {filteredTasks.map((task) => (
@@ -17,8 +17,7 @@ const TaskList = ({ tasks, toggleCard, openCardId, status }) => {
           text={task.text}
           ammount={task.ammount}
           genType={task.genType}
-          toggleCard={toggleCard}
-          isOpen={openCardId === task.id}
+          showCard={showCard}
           status={task.status}
         />
       ))}

@@ -12,12 +12,10 @@ import sizeImg from "../images/size.png"
 import textImg from "../images/text.png"
 import TaskList from './taskList'
 import TaskStatus from './taskStatus';
-
-
+import TaskCard from './taskCard';
 
 
 const Table = ()=>{
-
 
   const [tasks, setTasks] = useState([
     {
@@ -29,6 +27,7 @@ const Table = ()=>{
       text: 'Hello world',
       ammount: 30,
       genType: 1,
+      status: 'todo'
     },
     {
       id:2,
@@ -39,6 +38,7 @@ const Table = ()=>{
       text: 'Hello world',
       ammount: 40,
       genType: 2,
+      status: 'todo'
     },
     {
       id:3,
@@ -49,6 +49,7 @@ const Table = ()=>{
       text: 'Hello world',
       ammount: 20,
       genType: 1,
+      status: 'todo'
     },
     {
       id:4,
@@ -59,6 +60,7 @@ const Table = ()=>{
       text: 'Hello world',
       ammount: 30,
       genType: 2,
+      status: 'todo'
     },
     {
       id:5,
@@ -85,6 +87,74 @@ const Table = ()=>{
     
   ])
   
+  const removeTask = (taskId) => {
+    setTasks(tasks.filter((task) => task.id !== taskId));
+    hideCard()
+  };
+  
+  const setTaskDone = (taskId) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId ? { ...task, status: 'done' } : task
+      )
+    );
+    hideCard()
+  };
+
+
+  const [isCardActive, setCardActive] = useState(false)
+  const [activeTaskId, setActiveTaskId] = useState(null);
+
+  const showCard = (taskId) => {
+    setActiveTaskId(taskId);
+    setCardActive(true);
+  };
+
+  const hideCard = () => {
+    setCardActive(false);
+    setActiveTaskId(null);
+  };
+
+const sendRequest = () => {
+  const handleGenerateImages = async (taskName, layer, taskImages, taskDimension, style, prompts, amm, flow) => {
+    const requestBody = {
+      assigned_task_name: taskName, 
+      layer_name: layer, 
+      images: taskImages, 
+      dimension: taskDimension, 
+      style: style, 
+      manual_prompts: prompts, 
+      gen_per_ref: amm, 
+      flow: flow, 
+    };
+  
+    try {
+      const response = await fetch(
+        'https://tz-front-jvqis72guq-lm.a.run.app/api/genereate_images_tz', // Убедитесь, что это правильный URL для API
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+  
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+  
+      const data = await response.json();
+      console.log('Response:', data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  handleGenerateImages()
+  hideCard()
+  console.log('Request sent')
+}
+
   const [newTask, setNewTask] = useState({
     name: '',
     dimension: '1x1',
@@ -93,6 +163,7 @@ const Table = ()=>{
     ammount: '',
     genType: '1',
     images: [],  
+    status: 'todo'
   });
 
   const [imageFiles, setImageFiles] = useState([]); 
@@ -112,7 +183,7 @@ const Table = ()=>{
       images: files, 
     }));
   };
-
+  
   const addTask = () => {
     const images = newTask.images.map((file) => file.name.slice(0, 4) + '..'); 
     const taskToAdd = {
@@ -122,8 +193,6 @@ const Table = ()=>{
     };
 
     setTasks([...tasks, taskToAdd]);
-
-    
     setNewTask({
       name: '',
       dimension: '1x1',
@@ -144,27 +213,15 @@ const Table = ()=>{
   if (month < 10) month = '0' + month;
   const formattedDate = `${day}.${month}.${year}`;
 
-  const [openCardId, setOpenCardId] = useState(null);
-
-  const toggleCard = (id) => {
-    setOpenCardId(openCardId === id ? null : id);
-  };
-
-
-  const [status, setStatus] = useState('todo')
-  const goToStatusDone = ()=>{
-    setStatus('done')
-    console.log('Current status:', status);
-    
-    
-  }
   const goToStatusToDo = ()=>{
     setStatus('todo')
     console.log('Current status:', status);
   }
-  
-
-
+  const [status, setStatus] = useState('todo')
+  const goToStatusDone = ()=>{
+    setStatus('done')
+    console.log('Current status:', status);
+  }
 
   return(
     <div className="main">
@@ -179,6 +236,23 @@ const Table = ()=>{
 
       </div>
       <div className="main__content">
+
+      {activeTaskId && (
+          <TaskCard
+            id={activeTaskId}
+            name={tasks.find(task => task.id === activeTaskId).name}
+            text={tasks.find(task => task.id === activeTaskId).text}
+            dimension={tasks.find(task => task.id === activeTaskId).dimension}
+            images={tasks.find(task => task.id === activeTaskId).images}
+            isCardActive={isCardActive}
+            hideCard={hideCard}
+            setTaskDone={setTaskDone}
+            deleteTask={removeTask}
+            sendRequest={sendRequest}
+            
+          />
+        )}
+
       <TaskStatus status={status} setStatus={setStatus} goToStatusDone={goToStatusDone} goToStatusToDo={goToStatusToDo}/>
       <div className="main__table-wrapper">
         
@@ -197,7 +271,7 @@ const Table = ()=>{
               </tr>
           </thead>
           
-              <TaskList tasks={tasks} setTasks={setTasks} toggleCard={toggleCard} openCardId={openCardId} status={status}/>
+              <TaskList tasks={tasks} setTasks={setTasks} status={status} showCard={showCard}/>
               <tr className={`main__table-row ${status === "done" ? "hidden" : ""}`}>
                 <th className="main__table-item">
                   <input

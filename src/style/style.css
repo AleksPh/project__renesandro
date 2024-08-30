@@ -33,6 +33,10 @@ option {
   border-radius: 3px;
 }
 
+button:active {
+  transform: scale(0.97);
+}
+
 *,
 ::before,
 ::after {
@@ -263,33 +267,33 @@ svg * {
   background-color: #165275;
 }
 
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 40px;
-  background-color: #fff;
-}
 .main__card {
   position: absolute;
-  transform: translateX(-130%) translateY(-7%);
-  background-color: #fff;
-  height: 60vh;
-  width: 40vw;
-  z-index: 2;
+  height: 99%;
+  width: 99%;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border-radius: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 99;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.main__card.hidden {
+  display: none;
 }
 .main__card .card__content {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 25px;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  max-height: 630px;
+  overflow-y: scroll;
 }
 .main__card .card__button {
-  margin-top: 50px;
-  padding: 10px 20px;
+  padding: 5px 10px;
   font-size: 20px;
   font-weight: 600;
   border-radius: 15px;
@@ -301,6 +305,11 @@ svg * {
   color: #83007c;
 }
 .main__card .card__close {
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  width: 35px;
+  height: 35px;
   border-radius: 8px;
   font-weight: 600;
   border: 3px solid var(--color-nav-grey-text);
@@ -322,11 +331,62 @@ svg * {
   display: flex;
   flex-direction: column;
   padding: 20px 50px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 3px solid rgb(184, 184, 184);
+  border-radius: 10px;
+  width: 40vw;
 }
 .main__card > .card__container > .card__header {
   display: flex;
   justify-content: space-between;
   font-size: 20px;
+}
+
+.card__subtitle {
+  font-size: 14px;
+  color: #919191;
+  margin-top: 10px;
+}
+.card__buttons {
+  display: flex;
+  gap: 15px;
+}
+.card__button.gen {
+  background-color: #7ff3a2;
+}
+.card__button.set {
+  background-color: #8de3fd;
+}
+.card__button.del {
+  background-color: #ec8585;
+}
+.card__id {
+  background-color: #555555;
+  font-size: 16px;
+  color: #fff;
+  padding: 0 10px;
+  border-radius: 50%;
+}
+.card__text {
+  font-size: 16px;
+  color: #555555;
+}
+.card__image {
+  background-color: rgb(208, 252, 252);
+  padding: 0px 3px;
+  border: 2px solid #bebebe;
+  border-radius: 10px;
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  background-color: #fff;
 }
 .main__content {
   padding-top: 20px;
