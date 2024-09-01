@@ -146,5 +146,3 @@ const TaskCard = ({id, name, text, dimension, isCardActive, hideCard, setTaskDon
 }
 
 export default TaskCard
-
-
