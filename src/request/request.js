@@ -12,7 +12,7 @@ const fetchData = async () => {
 
     console.log(response.data); 
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('Error fetching data:', error); // доробити обробку помилок
   }
 };
 
