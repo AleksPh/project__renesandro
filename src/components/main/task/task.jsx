@@ -6,6 +6,7 @@ const Task = ({ id, name, dimension, templateId, images, text, ammount, genType,
   const idTemplateText = templateId == 1 ? "mwpswxcudtwxb" : "0xdoscyowl50c";
   const idTemplateClass = templateId == 1 ? "first" : "second";
 
+  const url = `https://testapi-jvqis72guq-lm.a.run.app/test_vidro/${name}_${dimension}/format_validation`;
   
   let dimensionText;
   let dimensionClass;
@@ -81,7 +82,7 @@ const Task = ({ id, name, dimension, templateId, images, text, ammount, genType,
                     </div>
                   </td>
                   <td className="main__table-item"><button className="main__table-item-button generate" onClick={handleGenerate}>Generate</button></td>
-                  <td className="main__table-item last"><button className="main__table-item-button folder">Folder</button></td>
+                  <td className="main__table-item last"><button className="main__table-item-button folder"><a  target='_blank' href={url}>Folder</a></button></td>
 
              </tr>
   )

@@ -266,6 +266,9 @@ svg * {
 .status__value.done {
   background-color: #165275;
 }
+.status__value.removed {
+  background-color: #f05e5e;
+}
 
 .main__card {
   position: absolute;
@@ -298,6 +301,9 @@ svg * {
   font-weight: 600;
   border-radius: 15px;
   border: 3px solid var(--color-nav-grey-text);
+}
+.main__card .card__button.hidden {
+  display: none;
 }
 .main__card .card__button:hover {
   transform: scale(1.05);
@@ -358,8 +364,15 @@ svg * {
 .card__button.set {
   background-color: #8de3fd;
 }
+.card__button.do {
+  background-color: #e7e579;
+}
 .card__button.del {
   background-color: #ec8585;
+}
+.card__button.res {
+  background-color: #df20bf;
+  color: #fff;
 }
 .card__id {
   background-color: #555555;
@@ -379,6 +392,30 @@ svg * {
   border-radius: 10px;
   margin-right: 3px;
   margin-left: 3px;
+}
+
+.empty__block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  position: absolute;
+  z-index: 100;
+  left: 50%;
+  top: 200%;
+  transform: translateX(-50%);
+}
+.empty__block.hidden {
+  display: none;
+}
+.empty__image {
+  max-height: 350px;
+  background-size: cover;
+}
+.empty__text {
+  font-size: 20px;
+  font-weight: 600;
+  color: #5f07b1;
 }
 
 .main {
@@ -408,6 +445,9 @@ svg * {
   flex: 1;
   margin: 0 auto;
   animation: fadeIn 1.5s ease-out forwards;
+}
+.main__table.blured {
+  filter: grayscale(0.9);
 }
 .main__table-wrapper {
   flex: 1;

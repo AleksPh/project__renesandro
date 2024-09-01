@@ -1,7 +1,23 @@
+import EmptyBlock from "../empty-block";
 import Task from "./task";
 
 const TaskList = ({ tasks, status, showCard }) => {
-  const filteredTasks = status === 'todo' ? tasks.filter((task) => task.status !== 'done') : tasks.filter((task) => task.status === 'done');
+  let filteredTasks;
+
+switch (status) {
+  case 'todo':
+    filteredTasks = tasks.filter((task) => task.status !== 'done' && task.status !== 'removed');
+    break;
+  case 'done':
+    filteredTasks = tasks.filter((task) => task.status === 'done');
+    break;
+  case 'removed':
+    filteredTasks = tasks.filter((task) => task.status === 'removed');
+    break;
+  default:
+    filteredTasks = tasks; 
+    break;
+}
   
   return (
     <tbody>
@@ -21,6 +37,9 @@ const TaskList = ({ tasks, status, showCard }) => {
           status={task.status}
         />
       ))}
+      {filteredTasks.length === 0 ? (
+          <EmptyBlock status={status}/>
+        ) : ''}
     </tbody>
   );
 };

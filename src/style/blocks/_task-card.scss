@@ -30,6 +30,9 @@
       font-weight: 600;
       border-radius: 15px;
       border: 3px solid var( --color-nav-grey-text);
+      &.hidden{
+        display: none;
+      }
       &:hover{
         transform: scale(1.05);
         border-color: #83007c;
@@ -95,8 +98,15 @@
     &.set{
       background-color: #8de3fd;
     }
+    &.do{
+      background-color: #e7e579;
+    }
     &.del{
       background-color: #ec8585;
+    }
+    &.res{
+      background-color: #df20bf;
+      color: #fff;
     }
   }
   &__id{

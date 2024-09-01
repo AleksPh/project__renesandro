@@ -84,13 +84,36 @@ const Table = ()=>{
       ammount: 40,
       genType: 2,
       status: 'done'
+    },
+    {
+      id:7,
+      name: 'RS_L1',
+      dimension: '1x1',
+      templateId: 1,
+      images: ['img-1'],
+      text: 'Hello world',
+      ammount: 70,
+      genType: 1,
+      status: 'done'
     }
     
   ])
   
   const removeTask = (taskId) => {
-    setTasks(tasks.filter((task) => task.id !== taskId));
-    hideCard()
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId ? { ...task, status: 'removed' } : task
+      )
+    );
+    hideCard();
+  };
+  const restoreTask = (taskId) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId ? { ...task, status: 'todo' } : task
+      )
+    );
+    hideCard();
   };
   
   const setTaskDone = (taskId) => {
@@ -223,6 +246,10 @@ const sendRequest = () => {
     setStatus('done')
     console.log('Current status:', status);
   }
+  const goToStatusRemoved = ()=>{
+    setStatus('removed')
+    console.log('Current status:', status);
+  }
 
   return(
     <div className="main">
@@ -245,10 +272,13 @@ const sendRequest = () => {
             text={tasks.find(task => task.id === activeTaskId).text}
             dimension={tasks.find(task => task.id === activeTaskId).dimension}
             images={tasks.find(task => task.id === activeTaskId).images}
+            status={tasks.find(task => task.id === activeTaskId).status}
+
             isCardActive={isCardActive}
             hideCard={hideCard}
             setTaskDone={setTaskDone}
             deleteTask={removeTask}
+            restoreTask={restoreTask}
             sendRequest={sendRequest}
             
           />
@@ -257,7 +287,8 @@ const sendRequest = () => {
       <TaskStatus status={status} setStatus={setStatus} goToStatusDone={goToStatusDone} goToStatusToDo={goToStatusToDo}/>
       <div className="main__table-wrapper">
         
-        <table className="main__table">
+        <table className={`main__table ${status === "removed" ? "blured" : ""}`}>
+          
           <thead>
               <tr className="main__table-row head">
                   <th className="main__table-item"><img src={nameImg} alt="" className='item__logo-img'/>Task Name</th>
@@ -273,7 +304,7 @@ const sendRequest = () => {
           </thead>
           
               <TaskList tasks={tasks} setTasks={setTasks} status={status} showCard={showCard}/>
-              <tr className={`main__table-row ${status === "done" ? "hidden" : ""}`}>
+              <tr className={`main__table-row ${status === "todo" ? "" : "hidden"}`}>
                 <th className="main__table-item">
                   <input
                     className="input"
@@ -381,20 +412,22 @@ const sendRequest = () => {
                   <button className="main__table-item-button folder">Folder</button>
                 </th>
               </tr>
-
+              
               
       </table>
       <div className="main__buttons">
-        <button className={`main__buttons-button ${status === "done" ? "hidden" : ""}`} onClick={addTask}>Add Task</button>
+        <button className={`main__buttons-button ${status === "todo" ? "" : "hidden"}`} onClick={addTask}>Add Task</button>
       </div>
       </div>
     <div className="main__table-footer">
           <div className="main__table-footer-text">Renesandro Tasks | {formattedDate}</div>
           <div className="main__table-footer-btns">
-            <button className="main__table-footer-button prev" onClick={goToStatusToDo}><img src={ArrowImg} alt="Arrow" /></button>
+            
             <button className={`main__table-footer-button ${status == 'todo' ? 'active' : ''} `} onClick={goToStatusToDo}>1</button>
-            <button className={`main__table-footer-button ${status == 'todo' ? '' : 'active'} `} onClick={goToStatusDone}>2</button>
-            <button className="main__table-footer-button next" onClick={goToStatusDone}><img src={ArrowImg} alt="Arrow" /></button>
+            <button className={`main__table-footer-button ${status == 'done' ? 'active' : ''} `} onClick={goToStatusDone}>2</button>
+            <button className={`main__table-footer-button ${status == 'removed' ? 'active' : ''} `} onClick={goToStatusRemoved}>3</button>
+
+           
           </div>
 
         </div>

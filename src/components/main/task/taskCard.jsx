@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 
-const TaskCard = ({id, name, text, dimension, isCardActive, hideCard, setTaskDone, deleteTask, sendRequest, images}) => {
+const TaskCard = ({id, name, text, dimension, isCardActive, hideCard, setTaskDone, deleteTask, restoreTask, sendRequest, images, status}) => {
   const [selectedImage, setSelectedImage] = useState('');
   const [selectedDimension, setSelectedDimension] = useState('');
   const [selectedStyle, setSelectedStyle] = useState('');
@@ -132,9 +132,12 @@ const TaskCard = ({id, name, text, dimension, isCardActive, hideCard, setTaskDon
                 
                 
                 <div className="card__buttons">
-                  <button className='card__button del' onClick={() => deleteTask(id)}>Delete</button>
-                  <button className='card__button set' onClick={() => setTaskDone(id)} >Set Done</button>
-                  <button className='card__button gen' onClick={handleRequest}>Generate</button>
+                  <button className={`card__button del ${status === 'removed' ? 'hidden' : ''}`} onClick={() => deleteTask(id)}>Delete</button>
+                  <button className={`card__button set ${status === 'todo' ? '' : 'hidden'}`} onClick={() => setTaskDone(id)} >Set Done</button>
+                  <button className={`card__button do ${status === 'done' ? '' : 'hidden'}`} onClick={() => restoreTask(id)} >Set To Do</button>
+                  <button className={`card__button gen ${status === 'todo' ? '' : 'hidden'}`}  onClick={handleRequest}>Generate</button>
+                  <button className={`card__button res ${status === 'removed' ? '' : 'hidden'}`}  onClick={() => restoreTask(id)}>Restore</button>
+
 
                   </div>
             </div>                                      

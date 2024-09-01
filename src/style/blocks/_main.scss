@@ -24,6 +24,9 @@
     flex: 1;
     margin: 0 auto;
     animation: fadeIn 1.5s ease-out forwards;
+    &.blured{
+      filter: grayscale(0.9);
+    }
     &-wrapper{
       flex: 1;
       overflow-y: scroll;
