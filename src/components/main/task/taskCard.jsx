@@ -25,7 +25,7 @@ const TaskCard = ({id, name, text, dimension, isCardActive, hideCard, setTaskDon
     
       try {
         const response = await fetch(
-          'https://tz-front-jvqis72guq-lm.a.run.app/api/genereate_images_tz', // Убедитесь, что это правильный URL для API
+          'https://tz-front-jvqis72guq-lm.a.run.app/api/genereate_images_tz', 
           {
             method: 'POST',
             headers: {
@@ -148,6 +148,3 @@ const TaskCard = ({id, name, text, dimension, isCardActive, hideCard, setTaskDon
 export default TaskCard
 
 
-// {images.map((index) => (
-//   <h6 key={index}>{index}</h6>
-// ))}

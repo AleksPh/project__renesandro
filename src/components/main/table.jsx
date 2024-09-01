@@ -131,7 +131,7 @@ const sendRequest = () => {
   
     try {
       const response = await fetch(
-        'https://tz-front-jvqis72guq-lm.a.run.app/api/genereate_images_tz', // Убедитесь, что это правильный URL для API
+        'https://tz-front-jvqis72guq-lm.a.run.app/api/genereate_images_tz', 
         {
           method: 'POST',
           headers: {
